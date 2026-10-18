@@ -1,3 +1,4 @@
+
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 
@@ -26,11 +27,18 @@ class $modify(TickSaverMenu, MenuLayer) {
     }
 
     void openTickSaver(CCObject*) {
+        auto range = Mod::get()->getSettingValue<int64_t>("analysis-range");
+
+        auto message = fmt::format(
+            "Playtest Analyzer: not implemented yet.\n\n"
+            "Current analysis range: +/- {} ticks.\n"
+            "Input Correction: coming later.",
+            range
+        );
+
         FLAlertLayer::create(
             "TickSaver",
-            "Playtest Analyzer: not implemented yet.\n\n"
-            "Planned analysis range: +/- 4 ticks.\n"
-            "Input Correction: coming later.",
+            message,
             "OK"
         )->show();
     }
