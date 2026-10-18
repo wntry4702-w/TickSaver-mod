@@ -13,5 +13,21 @@
   "description": "Timing analysis and input correction tools.",
   "dependencies": {
     "geode.node-ids": ">=v1.23.3"
+  },
+  "settings": {
+    "analysis-range": {
+      "name": "Analysis Range",
+      "description": "Number of ticks to check before and after the original timing.",
+      "type": "int",
+      "default": 4,
+      "min": 1,
+      "max": 12,
+      "control": {
+        "arrows": true,
+        "slider": true,
+        "slider-step": 1,
+        "input": true
+      }
+    }
   }
 }
