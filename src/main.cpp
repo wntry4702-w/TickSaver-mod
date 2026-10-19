@@ -22,11 +22,15 @@ namespace TickSaver {
     static std::size_t eventCount = 0;
     static float lastAttemptTime = 0.f;
     static bool playerDead = false;
+    static unsigned int timeUpdateCount = 0;
 
     static void clearAttempt() {
         eventCount = 0;
         lastAttemptTime = 0.f;
         playerDead = false;
+        timeUpdateCount = 0;
+
+        log::info("[TickSaver] Attempt data cleared");
     }
 
     static void recordInput(bool down, int button, bool player1) {
@@ -54,6 +58,16 @@ namespace TickSaver {
 class $modify(TickSaverPlayLayer, PlayLayer) {
     void updateAttemptTime(float attemptTime) {
         TickSaver::lastAttemptTime = attemptTime;
+        ++TickSaver::timeUpdateCount;
+
+        if (TickSaver::timeUpdateCount <= 5) {
+            log::info(
+                "[TickSaver] Time update #{}: {:.4f}",
+                TickSaver::timeUpdateCount,
+                attemptTime
+            );
+        }
+
         PlayLayer::updateAttemptTime(attemptTime);
     }
 
