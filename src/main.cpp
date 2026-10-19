@@ -89,6 +89,7 @@ class $modify(TickSaverGameLayer, GJBaseGameLayer) {
         if (layer &&
             static_cast<GJBaseGameLayer*>(layer) ==
                 static_cast<GJBaseGameLayer*>(this) &&
+            layer->isGameplayActive() &&
             !layer->m_isPlatformer) {
             TickSaver::recordInput(down, button, isPlayer1);
         }
