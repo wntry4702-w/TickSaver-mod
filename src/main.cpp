@@ -70,12 +70,13 @@ class $modify(TickSaverPlayLayer, PlayLayer) {
 
 class $modify(TickSaverGameLayer, GJBaseGameLayer) {
     void handleButton(bool down, int button, bool isPlayer1) {
-        if (PlayLayer::get() == this) {
-            auto layer = PlayLayer::get();
+        auto layer = PlayLayer::get();
 
-            if (layer && !layer->m_isPlatformer) {
-                TickSaver::recordInput(down, button, isPlayer1);
-            }
+        if (layer &&
+            static_cast<GJBaseGameLayer*>(layer) ==
+                static_cast<GJBaseGameLayer*>(this) &&
+            !layer->m_isPlatformer) {
+            TickSaver::recordInput(down, button, isPlayer1);
         }
 
         GJBaseGameLayer::handleButton(down, button, isPlayer1);
